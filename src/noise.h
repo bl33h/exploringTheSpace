@@ -1,21 +1,21 @@
 /*---------------------------------------------------------------------------
 Copyright (C), 2022-2023, Sara Echeverria (bl33h)
 @author Sara Echeverria
-FileName: point.h
+FileName: noise.h
 @version: I
-Creation: 06/07/2023
-Last modification: 11/07/2023
+Creation: 29/09/2023
+Last modification: 23/11/2023
 *Some parts were made using the AIs Bard and ChatGPT
 ------------------------------------------------------------------------------*/
-
 #pragma once
-#include "colors.h"
-#include <iostream>
+#include "./FastNoise.h"
+#include <vector>
 
-struct Vertex {
-  float x;
-  float y;
-  Color color;
+constexpr int NOISE_WIDTH = 512;
+constexpr int NOISE_HEIGHT = 512;
 
-  Vertex(float xCoord, float yCoord, const Color& c) : x(xCoord), y(yCoord), color(c) {}
-};
+FastNoiseLite noise;
+
+void setupNoise() {
+  noise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
+}
