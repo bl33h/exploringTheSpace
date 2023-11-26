@@ -32,6 +32,7 @@ The program is a graphics application that generates and renders celestial bodie
   - **shaders.h**: Header file defining shader functions for different celestial bodies.
   - **triangleFill.cpp**: Source code file for triangle filling functions.
   - **triangleFill.h**: Header file for triangle filling functions.
+  - **trianglea.h**: Header file for triangles functions.
   - **triangles.cpp**: Source code file containing functions related to triangles.
 
 ## External Dependencies
