@@ -26,3 +26,5 @@ bool triangleFill(
   std::vector<glm::vec3> &out_texcoords,
   std::vector<Face>& out_faces
 );
+
+void backgroundStarsConfig(float ox, float oy);

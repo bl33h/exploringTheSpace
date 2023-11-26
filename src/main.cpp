@@ -232,7 +232,7 @@ int main(int argc, char* argv[]) {
         float distanceAhead = 1.0f;
         glm::mat4 SpaceModel = glm::mat4(1.0f);
         glm::mat4 rotate;
-            SDL_Event event;
+        SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
             running = false;
@@ -269,9 +269,10 @@ int main(int argc, char* argv[]) {
             camera.targetPosition,
             camera.upVector
         );
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(renderer, 37, 14, 77, 255);
         SDL_RenderClear(renderer);
         clearFramebuffer();
+        backgroundStarsConfig(ox, oy);
 
         // sun
         glm::mat4 sunModel = glm::mat4(1.0f);

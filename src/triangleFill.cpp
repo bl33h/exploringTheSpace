@@ -8,6 +8,8 @@ Last modification: 23/11/2023
 *Some parts were made using the AIs Bard and ChatGPT
 ------------------------------------------------------------------------------*/
 #include "triangleFill.h"
+#include "framebuffer.h"
+#include "FastNoise.h"
 #include <array>
 #include <vector>
 #include <string>
@@ -74,4 +76,48 @@ bool triangleFill(const std::string& path, std::vector<glm::vec3>& out_vertices,
     }
 
     return true;
+}
+
+void backgroundStarsConfig(float ox, float oy) {
+    for (int y = 0; y < SCREEN_HEIGHT; y++) {
+        for (int x = 0; x < SCREEN_WIDTH; x++) {
+            FastNoiseLite noiseGenerator;
+            noiseGenerator.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
+            float scale = 1000.0f;
+            float noiseValue = noiseGenerator.GetNoise((x + (ox * 100.0f)) * scale, (y + oy * 100.0f) * scale);
+
+            if (noiseValue > 0.997f) {
+                float starSize = noiseValue * 3.0f;
+                starSize = std::max(2.8f, starSize);
+                float starIntensity = (noiseValue + 1.0f) / 2.0f;
+                starIntensity = std::min(1.0f, starIntensity * 1.5f);
+
+                Color starColor = {
+                    static_cast<uint8_t>(starIntensity * 246),
+                    static_cast<uint8_t>(starIntensity * 218),
+                    static_cast<uint8_t>(starIntensity * 255),
+                    255
+                };
+
+                FragColor starFragColor;
+                starFragColor.color = starColor;
+                starFragColor.z = starIntensity;
+
+                int startX = x - static_cast<int>(starSize / 2);
+                int startY = y - static_cast<int>(starSize / 4);
+                int endX = x + static_cast<int>(starSize / 2);
+                int endY = y + static_cast<int>(starSize / 2);
+
+                for (int starX = startX; starX <= endX; starX++) {
+                    for (int starY = startY; starY <= endY; starY++) {
+                        if (starX >= 0 && starX < SCREEN_WIDTH && starY >= 0 && starY < SCREEN_HEIGHT) {
+                            framebuffer[starY * SCREEN_WIDTH + starX] = starFragColor;
+                        }
+                    }
+                }
+            } else {
+                framebuffer[y * SCREEN_WIDTH + x] = blank;
+            }
+        }
+    }
 }
