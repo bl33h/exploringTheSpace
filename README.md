@@ -8,7 +8,7 @@ The program is a graphics application that generates and renders celestial bodie
 </p>
 
 <p align="center">
-  <a href="#Files">Storytelling</a> •
+  <a href="#Storytelling">Storytelling</a> •
   <a href="#Files">Files</a> •
   <a href="#External-dependencies">External Dependencies</a> •
   <a href="#Features">Features</a> •
