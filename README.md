@@ -42,9 +42,14 @@ The project makes use of the FastNoise library by Jordan Peck (jordan.me2@gmail.
 
 The main features of the graphics application include:
 
-- Implementation of various shaders for different celestial bodies (Earth, Neptune, Sun, Moon, Venus, Pluton, Random).
-- Noise generation for terrain and density.
-- Triangle filling functions for rendering.
+- Implementation of various shaders for different celestial bodies (Earth, Neptune, Sun, Moon, Venus, Pluton, Random, Destroyed Spaceship).
+- Shader-Based Rendering: Utilizes shaders to achieve realistic and dynamic rendering of celestial bodies, enabling the simulation of diverse visual effects.
+- Procedural Generation: Employs procedural techniques to generate planets with realistic surface features, such as oceans, landmasses, and atmospheric effects.
+- Noise Generation: Incorporates FastNoiseLite library for procedural noise generation, enhancing the realism of surface details and textures.
+- Dynamic Lighting: Implements dynamic lighting effects, including the illumination of planets and stars based on their positions and characteristics.
+- Background Stars: Generates a realistic starry background using procedural noise, contributing to the overall immersive experience.
+- Spaceship and Camera Interaction: Introduces a spaceship model created in Blender (.obj file) and features a camera that dynamically follows the spaceship, allowing users to explore the celestial environment.
+- Flexible Configuration: Allows for the configuration of celestial bodies through dedicated shaders, enabling customization of visual properties such as color, intensity, and atmospheric effects.
 
 ## How To Use
 
