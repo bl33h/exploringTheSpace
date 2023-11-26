@@ -8,11 +8,15 @@ The program is a graphics application that generates and renders celestial bodie
 </p>
 
 <p align="center">
+  <a href="#Files">Storytelling</a> •
   <a href="#Files">Files</a> •
   <a href="#External-dependencies">External Dependencies</a> •
   <a href="#Features">Features</a> •
   <a href="#how-to-use">How To Use</a>
 </p>
+
+## Storytelling
+It introduces a narrative where the spaceship, having crashed, embarks on a journey to find another planet to land on, enhancing the immersive experience of celestial exploration.
 
 ## Files
 - **configure.sh**: A shell script to set up the project dependencies and environment.
