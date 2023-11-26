@@ -1,5 +1,5 @@
 # exploringTheSpace
-It's
+The program is a graphics application that generates and renders celestial bodies using OpenGL and C++. It employs a shader-based rendering pipeline to create visually appealing representations of planets, stars, and other celestial objects. The use of noise functions and shaders allows for dynamic and realistic rendering of various astronomical bodies. Additionally, the program features a camera that follows a spaceship, represented by a Blender-created .obj file, adding an interactive element to the celestial simulation.
 
 <p align="center">
   <br>
