@@ -21,7 +21,8 @@ enum class shaderType {
     Neptune,
     Sun,
     Moon,
-    Venus
+    Venus,
+    destroyedSpaceship
 };
 
 Vertex vertexShader(const Vertex& vertex, const Uniforms& uniforms) {
@@ -85,6 +86,19 @@ float densityGenerator(float x, float y, float z) {
     } else {
         return 0.0f;
     }
+}
+
+Fragment fragmentShaderDestroyedSpaceship(Fragment& fragment) {
+    glm::vec3 destroyedSpaceshipColor = glm::vec3(0.6706f, 0.5490f, 0.7412f);
+    glm::vec3 finalColor = (destroyedSpaceshipColor * fragment.intensity);
+
+    fragment.color = Color(finalColor.r, finalColor.g, finalColor.b);
+
+    if (fragment.originalPos.y > 0.0f) {
+        float numberPosY = fragment.originalPos.y + 0.15f;
+        float numberSize = 0.03f;
+    }
+    return fragment;
 }
 
 Fragment fragmentShaderMoon(Fragment& fragment) {
@@ -178,9 +192,9 @@ Fragment fragmentShaderVenus(Fragment& fragment) {
     glm::vec3 warmColor = glm::vec3(0.29019607843, 1.0, 0.50588235294);
     glm::vec3 coolColor = glm::vec3(0.9333, 0.5216, 0.4588);
 
-    float heatValue = (glm::sin(fragment.originalPos.x * 7.0f) + glm::cos(fragment.originalPos.y * 7.0f)) * 0.5f + 0.5f;
+    float RandomValue = (glm::sin(fragment.originalPos.x * 7.0f) + glm::cos(fragment.originalPos.y * 7.0f)) * 0.5f + 0.5f;
 
-    glm::vec3 baseColor = glm::mix(glm::mix(coolColor, warmColor, heatValue), hotColor, heatValue);
+    glm::vec3 baseColor = glm::mix(glm::mix(coolColor, warmColor, RandomValue), hotColor, RandomValue);
 
     float totalNoise = 0.0f;
     float frequency = 1.0f;
@@ -219,9 +233,9 @@ Fragment fragmentShaderSun(Fragment& fragment) {
     glm::vec3 hotColor = glm::vec3(1.0, 0.498, 0.208);
     glm::vec3 warmColor = glm::vec3(1.0f, 0.0f, 0.0f);
 
-    float heatValue = (glm::sin(fragment.originalPos.x * 10.0f) + glm::cos(fragment.originalPos.y * 2.0f)) * 0.7f + 0.6f;
+    float RandomValue = (glm::sin(fragment.originalPos.x * 10.0f) + glm::cos(fragment.originalPos.y * 2.0f)) * 0.7f + 0.6f;
 
-    glm::vec3 interpolatedColor = glm::mix(warmColor, hotColor, heatValue);
+    glm::vec3 interpolatedColor = glm::mix(warmColor, hotColor, RandomValue);
 
     interpolatedColor = interpolatedColor * fragment.intensity;
     fragment.color = Color(interpolatedColor.r, interpolatedColor.g, interpolatedColor.b);
@@ -234,9 +248,9 @@ Fragment fragmentShaderRandom(Fragment& fragment) {
     glm::vec3 warmColor = glm::vec3(0.549, 0.796, 0.047);
     glm::vec3 coolColor = glm::vec3(0.549, 0.796, 0.047);
 
-    float heatValue = (glm::sin(fragment.originalPos.x * 7.0f) + glm::cos(fragment.originalPos.y * 7.0f)) * 0.5f + 0.5f;
+    float RandomValue = (glm::sin(fragment.originalPos.x * 7.0f) + glm::cos(fragment.originalPos.y * 7.0f)) * 0.5f + 0.5f;
 
-    glm::vec3 baseColor = glm::mix(glm::mix(coolColor, warmColor, heatValue), hotColor, heatValue);
+    glm::vec3 baseColor = glm::mix(glm::mix(coolColor, warmColor, RandomValue), hotColor, RandomValue);
 
     float totalNoise = 0.0f;
     float frequency = 1.0f;
@@ -288,22 +302,24 @@ Fragment fragmentShaderPluton(Fragment& fragment) {
 
 Fragment fragmentShader(Fragment& fragment, shaderType shaderType) {
     switch (shaderType) {
-        case shaderType::Random:
-            return fragmentShaderRandom(fragment);
-        case shaderType::Earth:
-            return fragmentShaderEarth(fragment);
-        case shaderType::Neptune:
-            return fragmentShaderNeptune(fragment);
-        case shaderType::Sun:
-            return fragmentShaderSun(fragment);
-        case shaderType::Moon:
-            return fragmentShaderMoon(fragment);
-        case shaderType::Venus:
-            return fragmentShaderVenus(fragment);
-        case shaderType::Pluton:
-            return fragmentShaderPluton(fragment);
-        default:
-        
-            return fragment;
-    }
+    case shaderType::Random:
+        return fragmentShaderRandom(fragment);
+    case shaderType::destroyedSpaceship:
+        return fragmentShaderDestroyedSpaceship(fragment);
+    case shaderType::Earth:
+        return fragmentShaderEarth(fragment);
+    case shaderType::Neptune:
+        return fragmentShaderNeptune(fragment);
+    case shaderType::Sun:
+        return fragmentShaderSun(fragment);
+    case shaderType::Moon:
+        return fragmentShaderMoon(fragment);
+    case shaderType::Venus:
+        return fragmentShaderVenus(fragment);
+    case shaderType::Pluton:
+        return fragmentShaderPluton(fragment);
+    default:
+        return fragment;
+}
+
 }
